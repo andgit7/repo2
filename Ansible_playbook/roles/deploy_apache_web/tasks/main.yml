@@ -1,0 +1,40 @@
+---
+
+- name: Check and Print Linux version
+  debug: var=ansible_os_family
+
+- block:    # ====block for RedHat=====   блок проверки под редхат
+
+    - name: INSTALL APACHE FOR REDHAT 
+      yum: name=httpd state=latest
+        
+    - name: Start WebServer and enabled on boot for REDHAT
+      service: name=httpd state=started enabled=yes
+  when: ansible_os_family == "RedHat"  #условие, если это редхат, то имя сервиса httpd
+
+
+- block:    #   =====block for Debian=======
+  
+    - name: INSTALL APACHE FOR DEBIAN  
+      yum: name=apache2 state=latest
+      when: ansible_os_family == "Debian"
+
+
+    - name: Start WebServer and enabled on boot for DEBIAN 
+      service: name=apache2 state=started enabled=yes
+  when: ansible_os_family == "Debian"   #условие, если это дебиан, то имя сервиса httpd
+
+ 
+ 
+#генерация уникальных для каждого сервера файлов html: создается файл html но с расширением j2, в нем в нужных местах 
+#ставятся переменные вида - server hostname : {{ ansible_hostname }} из ansible all -m setup, можно указать переменную в файл hosts
+- name: Генерация html файлов 
+  template: src=index.j2 dest={{ destin_folder }}/index.html mode=0555 # тоже что и копирование, только вставляются переменные, /index.html - перименование
+  notify: 
+    - Restart Apache for RedHat     #обработчик, если что-то скопировалсь заданы два хендлера
+    - Restart Apache for Debian
+
+#далее два варианта копирования, первый всю папку целиком, второй конкретные файлы
+- name: копирование всей папки на сервер Апач
+  copy: src={{ item }} dest={{ destin_folder }} mode=0555   #задание item
+  with_fileglob: "*.*"                  #команда копирования по шаблону, тут все файлы *.* 

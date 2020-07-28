@@ -1,0 +1,9 @@
+---
+- name: Restart Apache for Debian
+  service: name=httpd state=restarted
+  when: ansible_os_family == "RedHat"  #этот хендлер срабатывает когда os_family Редхат
+
+- name: Restart Apache for RedHat
+  service: name=apache2 state=restarted
+  when: ansible_os_family == "Debian"   #этот хендлер срабатывает когда os_family Дебиан
+# handlers file for deploy_apache_web

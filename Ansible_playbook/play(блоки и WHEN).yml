@@ -1,0 +1,56 @@
+---
+
+- name: Install Apache and upload web page blyat
+  hosts: all
+  become: yes
+
+  vars:                                                                     #задание переменных
+     source_file: /home/and/index.html
+     destin_file: /var/www/html
+
+  tasks:
+  - name: Check and Print Linux version
+    debug: var=ansible_os_family
+    
+  - block:                                                                  # ====block for RedHat=====   блок проверки под редхат
+
+
+      - name: INSTALL APACHE FOR REDHAT 
+        yum: name=httpd state=latest
+        
+
+      - name: Copy Webpages to servers redhat
+        copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+        notify: Restart Apache for RedHat                                #обработчик, если файл скопировался запускает рестарт апач
+
+
+      - name: Start WebServer and enabled on boot for REDHAT
+        service: name=httpd state=started enabled=yes
+
+    when: ansible_os_family == "RedHat"                                     #условие, если это редхат, то имя сервиса httpd
+
+
+
+
+  - block:    #   =====block for Debian=======
+  
+
+      - name: INSTALL APACHE FOR DEBIAN  
+        yum: name=apache2 state=latest
+        when: ansible_os_family == "Debian"
+
+      - name: Copy Webpages to servers debian
+        copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+        notify: Restart Apache for Debian                                   #обработчик, если файл скопировался запускает рестарт апач
+
+      - name: Start WebServer and enabled on boot for DEBIAN 
+        service: name=apache2 state=started enabled=yes
+    when: ansible_os_family == "Debian"                                     #условие, если это дебиан, то имя сервиса httpd
+
+  
+
+  handlers:                                                                  #обработчики под разные редхат и дебиан
+   - name: Restart Apache for Debian
+     service: name=apache2 state=restarted
+   - name: Restart Apache for RedHat
+     service: name=httpd state=restarted

@@ -1,0 +1,20 @@
+---
+
+- name: использование import include
+  hosts: servers_LO
+  become: yes
+
+  vars:
+    mytext: "Hello tvar"
+
+  tasks:
+  - name: Пинг
+    shell: ping -c2 ya.ru
+    register: results
+
+  - debug:
+     var: results                                             
+
+
+  - include: create_folder.yml                                #подключается файл yml
+  - include: create_file.yml mytext="переменная из плейбука"  #подключается файл yml и добавляется переменная

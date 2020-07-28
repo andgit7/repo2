@@ -1,0 +1,49 @@
+---
+
+- name: команда Delegate_to
+  become: yes
+  hosts: all
+  
+  vars:
+    mytext: "Hello wolrd"
+    mytext2: "Fuck off"
+  tasks:
+
+  - name: отмена регистрации из лоад балансера
+    shell: echo This server {{ inventory_hostname }} was deregistr from our load balancer, node name is {{ ansible_nodename }} >> /home/and/logans.log
+    delegate_to: 127.0.0.1
+
+  - name: обновление базы
+    shell: echo ОБНОВЛЕНИЕ БАЗЫ ТИПА ТОГО
+    run_once: true                                  # запустить команду 1 раз на любом сервере  
+    
+  - name: Создать файл 1
+    copy: 
+     dest: /home/and/file1.txt
+     content: |
+        Text Line1, in file1
+        Text Line2, in file1
+        Text Line3, {{ mytext }}
+    delegate_to: centos
+
+
+  - name: Создать файл 2
+    copy: 
+     dest: /home/and/file2.txt
+     content: |
+        Text Line1, in file2
+        Text Line2, in file2
+        Text Line3, {{ mytext2 }}
+       
+  - name: перезагрузка серверов
+    shell: sleep 3 && reboot now           # пауза 3 секунды и перезапуск сервера, чтобы успеть выпольнить остальные команды
+    async: 1                               # непонтяная хуйня, должна сразу запустить перезапуск
+    poll: 0
+
+  - name: ждем перезапуск сервера       
+    wait_for:                              # команда ожидания   
+      host: "{{ inventory_hostname }}"     # что ждем, тут хосты
+      state: started                       # чего ждём, тут состояние запущено
+      delay:                               # задержка перед ожиданием
+      timeout: 40                          # сколько максимум ждём 
+    delegate_to: 127.0.0.1                 # команду надо ждать на мастере ансибл т.к. остальные сервера в ребуте  

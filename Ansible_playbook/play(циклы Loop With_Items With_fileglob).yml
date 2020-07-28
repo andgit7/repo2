@@ -1,0 +1,62 @@
+---
+
+- name: Install Apache and upload web page blyat
+  hosts: servers_LO
+  become: yes
+
+  vars:
+     source_folder: /home/and/Mysite2
+     destin_folder: /var/www/html
+
+  tasks:
+  - name: Check and Print Linux version
+    debug: var=ansible_os_family
+
+  - block:    # ====block for RedHat=====   блок проверки под редхат
+
+      - name: INSTALL APACHE FOR REDHAT 
+        yum: name=httpd state=latest
+        
+      - name: Start WebServer and enabled on boot for REDHAT
+        service: name=httpd state=started enabled=yes
+    when: ansible_os_family == "RedHat"  #условие, если это редхат, то имя сервиса httpd
+
+
+  - block:    #   =====block for Debian=======
+  
+      - name: INSTALL APACHE FOR DEBIAN  
+        yum: name=apache2 state=latest
+        when: ansible_os_family == "Debian"
+
+
+      - name: Start WebServer and enabled on boot for DEBIAN 
+        service: name=apache2 state=started enabled=yes
+    when: ansible_os_family == "Debian"   #условие, если это дебиан, то имя сервиса httpd
+
+ 
+#далее два варианта копирования, первый всю папку целиком, второй конкретные файлы
+  - name: копирование всей папки на сервер Апач
+    copy: src={{ item }} dest={{ destin_folder }} mode=0555   #задание item
+    with_fileglob: "{{ source_folder }}/*.*"                  #команда копирования по шаблону, тут все файлы *.* 
+
+
+  # - name: Копирование конкретных файлов
+  #   copy: src={{ source_folder }}/{{ item }} dest={{ destin_folder }} mode=0555   #брать файлы из сорс папки, т.к. их много переслить 
+    # loop:
+    #  - "index.html" #перечисление файлов
+    #  - "1.jpg"
+    #  - "2.jpg"
+    #  - "3.jpg"
+    notify: 
+      - Restart Apache for RedHat     #обработчик, если что-то скопировалсь заданы два хендлера
+      - Restart Apache for Debian
+
+
+  handlers:                              #обработчики разбираются где редхат или дебиан
+   - name: Restart Apache for Debian
+     service: name=httpd state=restarted
+     when: ansible_os_family == "RedHat"  #этот хендлер срабатывает когда os_family Редхат
+
+   - name: Restart Apache for RedHat
+     service: name=apache2 state=restarted
+     when: ansible_os_family == "Debian"   #этот хендлер срабатывает когда os_family Дебиан

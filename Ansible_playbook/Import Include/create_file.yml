@@ -1,0 +1,17 @@
+---
+
+- name: Создать файл 1
+  copy: 
+    dest: /home/and/file1.txt
+    content: |
+      Text Line1, in file1
+      Text Line2, in file1
+      Text Line3, {{ mytext }}
+
+- name: Создать файл 2
+  copy: 
+    dest: /home/and/file2.txt
+    content: |
+      Text Line1, in file2
+      Text Line2, in file2
+      Text Line3, {{ mytext }}

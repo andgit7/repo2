@@ -1,0 +1,35 @@
+---
+
+- name: My super Playbook
+  hosts: all
+  become: yes
+
+  vars:                                                                                                 #задание переменных
+    message1: Hello
+    message2: world
+    secret: Fucking
+
+  tasks:                                                                                                 #вывод переменной secret
+  - name: Print Secret variable
+    debug:
+      var: secret
+
+  - debug:
+      msg: "Sekretnoe slovo: {{ secret }}"                                                               #вывод сообщение с переменной secret
+
+  - debug:
+      msg: "Vladelec etogo servera -->{{ owner }}<--"                                                    #вывод с переменной owner указаной в hosts
+
+  - set_fact: full_message="{{ message1 }} {{ message2 }} from {{ owner }} iz {{ hueowner }}"            # сборка нескольких переменных в одну строку
+
+  - debug:
+      var: full_message                                                                                  #вывод  собранных переменных
+
+  - debug:
+      var: ansible_nodename                                                                              #вывод переменной из ansible all –m setup
+
+  - shell: uptime       
+    register: results                                           #если надо вывести рез-тат команды,	registr запись результатов команды в переменную
+
+  - debug:
+      var: results                                              #вывод uptime      

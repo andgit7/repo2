@@ -1,0 +1,5 @@
+---
+
+ansible_user          : and
+ansible_ssh_password  : B0ltanka
+ansible_sudo_pass     : B0ltanka
