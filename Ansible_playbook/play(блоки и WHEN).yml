@@ -45,7 +45,7 @@
 
       - name: Start WebServer and enabled on boot for DEBIAN 
         service: name=apache2 state=started enabled=yes
-    when: ansible_os_family == "Debian"                                     #условие, если это дебиан, то имя сервиса httpd
+    when: ansible_os_family == "Debian"                                     #условие, если это дебиан, то имя сервиса apache2
 
   
 
