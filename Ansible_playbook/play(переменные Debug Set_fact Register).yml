@@ -20,7 +20,7 @@
   - debug:
       msg: "Vladelec etogo servera -->{{ owner }}<--"                                                    #вывод с переменной owner указаной в hosts
 
-  - set_fact: full_message="{{ message1 }} {{ message2 }} from {{ owner }} iz {{ hueowner }}"            # сборка нескольких переменных в одну строку
+  - set_fact: full_message="{{ message1 }} {{ message2 }} from {{ owner }} iz {{ hueowner }}"            #сборка нескольких переменных в одну строку
 
   - debug:
       var: full_message                                                                                  #вывод  собранных переменных

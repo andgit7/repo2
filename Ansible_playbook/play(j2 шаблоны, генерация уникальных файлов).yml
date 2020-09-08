@@ -38,7 +38,7 @@
 #генерация уникальных для каждого сервера файлов html: создается файл html но с расширением j2, в нем в нужных местах 
 #ставятся переменные вида - server hostname : {{ ansible_hostname }} из ansible all -m setup, можно указать переменную в файл hosts
   - name: Генерация html файлов 
-    template: src={{ source_folder }}/index.j2 dest={{ destin_folder }}/index.html mode=0555 # тоже что копирование, только вставляются переменные, /index.html - перимнование
+    template: src={{ source_folder }}/index.j2 dest={{ destin_folder }}/index.html mode=0555 # тоже что копирование, только вставляются переменные, /index.html - переименование
     notify: 
       - Restart Apache for RedHat     #обработчик, если что-то скопировалсь заданы два хендлера
       - Restart Apache for Debian
