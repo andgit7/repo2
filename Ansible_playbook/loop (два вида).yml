@@ -1,0 +1,28 @@
+---
+
+- name: Loops
+  hosts: test
+  become: yes
+  
+  tasks:
+    - name: say hello all
+      debug: msg="Hello {{ item }}"
+      loop:
+       - "vasya"
+       - "Petya"
+       - "Masha"
+       
+    - name: Loop Until example
+      shell: echo -n Z >> loopsfile.txt && cat loopsfile.txt   #запустить команду записывать и выводить в файл на уд. сервере
+      register: output                                         #сохранить результат в переменную 
+      delay:2                                                  #задержка 2 секунды
+      retries: 10                                              #повторять макимум 10 раз
+      until: output.stdout.find("ZZZ") == false                #проверка аутпут, продолжать делать пока не будет 4 Z в выводе
+    - name: Print output                                       #вывод результата на экран         
+      debug: var=output.stdout    
+      
+    - name: Install many apt
+      yum: name={{ item }} state=installed
+      loop:
+        - python
+        - nginx        
