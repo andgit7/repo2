@@ -1,0 +1,207 @@
+---
+
+
+- name: Install K8S
+  hosts: servers_K8SALL
+  become: yes
+  
+  
+
+  tasks:
+    - name: update
+      shell: apt update && apt upgrade -y
+
+    - name: install packages 
+      yum:
+         name:
+           - curl
+           - apt-transport-https
+           - git
+           - iptables-persistent
+           - cowsay
+         state: present      
+  
+
+
+
+#    - name: install packages 
+#      shell: apt install curl -y && apt install apt-transport-https -y && apt install git -y && apt install iptables-persistent -y && apt install cowsay -y
+#      register: instpack   
+#    - debug:
+#       var: instpack
+      
+    - name: swap off 
+      shell: swapoff -a
+      register: swapoff      
+    - debug:
+       var: swapoff
+
+    - name: edit fstab
+      lineinfile: dest=/etc/fstab
+              regexp='^/swap.img.*$'
+              insertbefore=BOF
+              line='#/swap.img       none    swap    sw      0       0'
+
+
+    - name: add file 1
+      copy: 
+       dest: /etc/modules-load.d/k8s.conf
+       content: |
+         br_netfilter
+         overlay
+      register: addf1   
+    - debug:
+       var: addf1
+
+      
+    - name: module core download 
+      shell: modprobe br_netfilter && modprobe overlay
+      register: mcd      
+    - debug:
+       var: mcd
+      
+    - name: test modules core 
+      shell: lsmod | egrep "br_netfilter|overlay"
+      register: tmc      
+    - debug:
+       var: tmc
+      
+    - name: add file 2
+      copy: 
+       dest: /etc/sysctl.d/k8s.conf 
+       content: |
+          net.bridge.bridge-nf-call-ip6tables = 1
+          net.bridge.bridge-nf-call-iptables = 1
+      register: addf2   
+    - debug:
+       var: addf2
+      
+    - name: ally parameters 
+      shell: sysctl --system
+      register: allyp      
+    - debug:
+       var: allyp
+       
+
+    - name: install containerd
+      shell: apt install containerd -y
+      register: instcont   
+    - debug:
+       var: instcont
+       
+    - name: install docker
+      shell: apt install docker.io -y
+      register: instdock   
+    - debug:
+       var: instdock
+       
+    - name: enable docker
+      shell: systemctl enable docker
+      register: endock   
+    - debug:
+       var: endock
+       
+      
+    - name: add file 3
+      copy: 
+       dest: /etc/docker/daemon.json 
+       content: |
+          {
+            "exec-opts": ["native.cgroupdriver=systemd"],
+            "log-driver": "json-file",
+            "log-opts": {
+               "max-size": "100m"
+            },
+            "storage-driver": "overlay2",
+            "storage-opts": [
+            "overlay2.override_kernel_check=true"
+            ]
+          }
+        
+          
+      register: addf3   
+    - debug:
+       var: addf3
+       
+    - name: restart docker
+      shell: systemctl restart docker
+      register: redock   
+    - debug:
+       var: redock
+       
+       
+    - name: install kubernetes
+      shell: curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+      register: inskub   
+    - debug:
+       var: inskub
+       
+       
+    - name: add file 4
+      copy: 
+       dest: /etc/apt/sources.list.d/kubernetes.list 
+       content: |
+          deb https://apt.kubernetes.io/ kubernetes-xenial main
+          
+      register: addf4   
+    - debug:
+       var: addf4 
+       
+       
+    - name: apt update
+      shell: apt update -y
+      register: aptup   
+    - debug:
+       var: aptup
+
+    - name: install packages 
+      yum:
+         name:
+           - kubelet
+           - kubeadm
+           - kubectl
+         state: present 
+       
+#    - name: install kubernetes packeges
+#      shell: apt install kubelet kubeadm kubectl -y
+#      register: inskubpack   
+#    - debug:
+#       var: inskubpack
+
+              
+    - name: update off
+      shell: apt-mark hold kubelet kubeadm kubectl
+      register: upoff   
+    - debug:
+       var: upoff     
+         
+
+        
+- name: Install K8S37
+  hosts: servers_K8SMASTER
+  become: yes
+  
+  tasks:
+    - name: init pod network                              #лучше запустить в терминале, для нормального копирования команды присоединения в кластер 
+      shell: kubeadm init --pod-network-cidr=10.0.20.0/16 #или на мастер ноде, для получения команды присоединения к кластеру запустить команду: kubeadm token create --print-join-command
+      register: inpod   
+    - debug:
+       var: inpod  
+  
+    - name: edit export variables
+      lineinfile: dest=/etc/environment
+
+              line='export KUBECONFIG=/etc/kubernetes/admin.conf' 
+              
+
+    - name: install CNI
+      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+      register: instcni   
+    - debug:
+       var: instcni
+       
+       
+
+
+
+ 
