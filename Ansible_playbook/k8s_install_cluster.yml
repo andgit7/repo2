@@ -83,24 +83,50 @@
        var: allyp
        
 
-    - name: install containerd
-      shell: apt install containerd -y
-      register: instcont   
-    - debug:
-       var: instcont
+#    - name: install containerd
+#      shell: apt install containerd -y
+#      register: instcont   
+#    - debug:
+#       var: instcont
+#
+#      
+#    - name: install docker
+#      shell: apt install docker.io -y
+#      register: instdock   
+#    - debug:
+#       var: instdock
+
+
        
-    - name: install docker
-      shell: apt install docker.io -y
+    - name: add key docker
+      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+      register: adddock   
+    - debug:
+       var: adddock
+       
+    - name: add repository
+      shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      
+
+    - name: install docker 
+      yum:
+         name:
+           - docker-ce
+         state: present
       register: instdock   
     - debug:
        var: instdock
-       
+
+
+    - name: user right
+      shell: usermod -aG docker $USER
+
+
     - name: enable docker
       shell: systemctl enable docker
       register: endock   
     - debug:
-       var: endock
-       
+       var: endock       
       
     - name: add file 3
       copy: 
@@ -182,8 +208,8 @@
   become: yes
   
   tasks:
-    - name: init pod network                              #лучше запустить в терминале, для нормального копирования команды присоединения в кластер 
-      shell: kubeadm init --pod-network-cidr=10.0.20.0/16 #или на мастер ноде, для получения команды присоединения к кластеру запустить команду: kubeadm token create --print-join-command
+    - name: init pod network  
+      shell: kubeadm init --pod-network-cidr=10.0.20.0/16
       register: inpod   
     - debug:
        var: inpod  
@@ -200,8 +226,36 @@
     - debug:
        var: instcni
        
+    - name: firewall
+      shell: iptables -I INPUT 1 -p tcp --match multiport --dports 6443,2379:2380,10250:10252 -j ACCEPT
+      register: fiw   
+    - debug:
+       var: fiw       
        
+    - name: firewall enable
+      shell: netfilter-persistent save
+      register: fiw1   
+    - debug:
+       var: fiw1       
 
+- name: Install K8S Workers
+  hosts: servers_K8SWORKERS
+  become: yes
+  
+  tasks:
+    - name: firewall workers
+      shell: iptables -I INPUT 1 -p tcp --match multiport --dports 10250,30000:32767 -j ACCEPT
+      register: fiww   
+    - debug:
+       var: fiww       
+       
+    - name: firewall enable
+      shell: netfilter-persistent save
+      register: fiww1   
+    - debug:
+       var: fiww1  
+       
+#  kubeadm token create --print-join-command    #command on masternode for add workernode
 
 
  
