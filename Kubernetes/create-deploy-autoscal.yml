@@ -1,0 +1,65 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+   name: my-deployment-autoscaling
+   labels:
+     app : my-k8s-app
+     env : prod
+     owner: Andrey
+spec:                  #спецификации, с какими подами этот деплой будет работать   
+  replicas: 2          # запустить 3 реплики
+  selector:
+    matchLabels:       # с подами, котоорые соответсвуют этим лейблс
+      project: k8s-autoscal
+  template:
+    metadata:
+      labels:
+       project: k8s-autoscal
+       
+    spec:
+      containers:
+        - name: k8s-web-rep
+          image: x3m5555/k8s
+          ports:
+            - containerPort: 80   
+            
+---
+apiVersion: autoscaling/v2beta1          #важно имя /v2beta1
+kind: HorizontalPodAutoscaler            #тип: автоскелинг
+metadata: 
+  name: my-autoscaling
+spec:
+  scaleTargetRef:
+     apiVersion: apps/v2
+     kind: Deployment                  #что автоскелить - развертывание
+     name: my-deployment-autoscaling   #имя должно соответсвовать развертыванию выше в apiVersion : apps/v1
+  minReplicas: 2                       #минимум / максимум подов
+  maxReplicas: 5
+  metrics:
+  - type : Resource                    # скелить при превышении цпу выше 70 или памяти 80 %
+    resource:
+      name: cpu
+      targetAverageUtilization: 70
+  - type : Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 80   
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+      
