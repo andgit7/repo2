@@ -1,0 +1,97 @@
+---
+
+- name: Install Zabbix agents
+  hosts: servers_Z
+  become: yes
+  
+  
+
+  tasks: 
+   - name: IP
+     debug: var=ansible_default_ipv4
+   - name: add repository
+                                                                                                     
+     
+     shell: wget https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb      
+     register: add                                           
+
+   - debug:
+      var: add  
+      
+   - name: install DEB
+     shell: dpkg -i zabbix-release_5.0-1+focal_all.deb
+     register: deb
+     
+   - debug:
+      var: deb
+
+      
+   - name: update
+     shell: apt update
+     register: apt
+     
+   - debug:
+      var: apt
+
+   - name: apt install
+     shell: apt install zabbix-agent
+     register: zab
+     
+   - debug:
+      var: zab
+      
+   - name: IP
+     debug: var=ansible_default_ipv4
+
+   - name: change a server
+     lineinfile: dest=/etc/zabbix/zabbix_agentd.conf
+              regexp='^Server='
+              insertbefore=BOF
+              line='Server=192.168.0.36'
+              
+   - name: change a serverActive
+     lineinfile: dest=/etc/zabbix/zabbix_agentd.conf
+              regexp='^ServerActive='
+              insertbefore=BOF
+              line='ServerActive=192.168.0.36'
+              
+   - name: change a hostname
+     lineinfile: dest=/etc/zabbix/zabbix_agentd.conf
+              regexp='^Hostname='
+              insertbefore=BOF
+              line='Hostname={{ ansible_hostname }}'  
+              
+   - name: change a Timeout
+     lineinfile: dest=/etc/zabbix/zabbix_agentd.conf
+              regexp='^#Timeout='
+              insertbefore=BOF
+              line='Timeout=10'   
+              
+   - name: change a HostMetadata-autoreg
+     lineinfile: dest=/etc/zabbix/zabbix_agentd.conf
+              regexp='^#HostMetadata='
+              insertbefore=BOF
+              line='HostMetadata=linux.autoreg'              
+              
+              
+   - name: enable zabbix agent
+     shell: systemctl enable --now zabbix-agent
+     register: enable
+     
+   - debug:
+      var: enable  
+      
+   - name: reboot
+     shell: sleep 3 && reboot now
+     
+   - name: wait reboot       
+     wait_for:
+       host: "{{ inventory_hostname }}"
+       state: started
+       delay: 5
+       timeout: 40
+     delegate_to: 127.0.0.1
+      
+ 
+
+
