@@ -256,6 +256,6 @@
        var: fiww1  
        
 #  kubeadm token create --print-join-command    #command on masternode for add workernode
-
+# https://stackoverflow.com/questions/54608441/kubectl-connectivity-issue  fix error on kubectl cluster-info 
 
  
