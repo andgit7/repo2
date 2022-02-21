@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: x3m55
+spec:
+  tls:
+  - hosts: 
+    - x3m55.example.com
+    secretName: tls-secret
+  rules:
+  - host: x3m55.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: x3m55-nodeport
+          servicePort: 80

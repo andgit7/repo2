@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: x3m55
+spec:
+  tls:
+  - hosts:
+    - x3m55.example.com
+    secretName: tls-secret 
+  rules:
+  - host: x3m55.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: x3m55-nodeport
+          servicePort: 80
+   
+          
+          
+          
+#  - host: x3m55.example2.com
+#    http:
+#      paths:
+#      - path: /
+#        backend:
+#          serviceName: x3m55-nodeport
+#          servicePort: 80
