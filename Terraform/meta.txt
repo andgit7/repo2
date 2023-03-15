@@ -1,0 +1,19 @@
+#cloud-config
+users:
+  - name: and
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCs5awYhYHO8bJVbRfUryRlnOKlAOO+KEwgKetNWN5Zirf1V4bNXC4ngMDp4lqtCcBIUPxHuxjzSoREv+LkPcBaTPsvuECEtUx6pRfKvq4dhCSLLsdr/ZIgACqIbWVSoTdA8ptv8kHGVNVUNfQXwsJE+SpJD8H1NcShysrW4epY4SVRo5x0QobuFq5I02VWQ+mcTJMEg6GOkPYZPSjLowKzsn9mli20nEo73DMy/tSU685knrBB/gm0O8ntEb936wdB3v+a4Kmp8Fyn8n2M7tCT5xD9RBuXQsTeDbwIdPHyCk3KeuZKobwREvHmEwZAfwVK47wk2+PESrAGzVJVh1oN root@dockeransible
+
+
+packages:
+  - nginx
+
+
+bootcmd:
+  - sudo touch /var/www/html/index.html 
+  - echo "<h2>WebServer" > /var/www/html/index.html
+  - touch /var/fromterraform2.txt 
+  - service nginx start
