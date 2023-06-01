@@ -19,12 +19,12 @@ spec:                  #спецификации, с какими подами этот деплой будет работать
     spec:
       containers:
         - name: k8s-web-rep
-          image: x3m5555/k8s
+          image: x3m5555/nginx-php
           ports:
             - containerPort: 80   
             
 ---
-apiVersion: autoscaling/v2beta1          #важно имя /v2beta1
+apiVersion: autoscaling/v2beta2          #важно имя /v2beta1
 kind: HorizontalPodAutoscaler            #тип: автоскелинг
 metadata: 
   name: my-autoscaling
