@@ -24,7 +24,7 @@ spec:                  #спецификации, с какими подами этот деплой будет работать
             - containerPort: 80   
             
 ---
-apiVersion: autoscaling/v2beta2          #важно им€ /v2beta1
+apiVersion: autoscaling/v2          #важно им€ /v2beta1
 kind: HorizontalPodAutoscaler            #тип: автоскелинг
 metadata: 
   name: my-autoscaling
@@ -39,13 +39,17 @@ spec:
   - type : Resource                    # скелить при превышении цпу выше 70 или пам€ти 80 %
     resource:
       name: cpu
-      targetAverageUtilization: 70
-  - type : Resource
+      target:
+        type: Utilization
+        averageUtilization: 5
+ 
+     
+  - type : Resource                    # скелить при превышении цпу выше 70 или пам€ти 80 %
     resource:
       name: memory
-      targetAverageUtilization: 80   
-     
-     
+      target:
+        type: Utilization
+        averageUtilization: 5     
      
      
      
