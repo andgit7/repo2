@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-env
+data:
+  zalupa: "365"
+  curl : "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
