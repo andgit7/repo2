@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment-autoscaling
+spec:
+  replicas: 3
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate  
+  selector:
+    matchLabels:
+      app: nginx-stress
+  template:
+    metadata:
+      labels:
+        app: nginx-stress
+    spec:
+      containers:
+      - name: php-apache
+        image: x3m5555/nginx-stress:ver3
+        readinessProbe:
+          periodSeconds: 1
+          httpGet:
+            path: /
+            port: 8080
+        env:
+        - name: enviroment
+          valueFrom:
+            configMapKeyRef:
+              name: cm-env
+              key: zalupa
+        - name: FOO-SECRET
+          valueFrom:
+            secretKeyRef:
+              name: nginx-certs
+              key: foo
+        ports:
+        - containerPort: 80
+          name: nginxstress
+        - containerPort: 443
+          name: nginxstress-ssl
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 20Mi
+
+             
+        volumeMounts:
+        - name: index
+          mountPath: /var/www/html/           
+        - name: config
+          mountPath: /etc/nginx/conf.d
+        - name: certs
+          mountPath: /etc/nginx/certs/
+          
+      volumes:
+      - name: index
+        configMap:
+          name: cm-index
+      - name: config
+        configMap:
+          name: nginx-config 
+      - name: certs
+        secret:
+          secretName: nginx-certs          
+          
+           
+ 
+#---
+#---
+#apiVersion: autoscaling/v2          #важно имя /v2beta1
+#kind: HorizontalPodAutoscaler            #тип: автоскелинг
+#metadata: 
+#  name: my-autoscaling
+#spec:
+#  scaleTargetRef:
+#     apiVersion: apps/v2
+#     kind: Deployment                  #что автоскелить - развертывание
+#     name: my-deployment-autoscaling   #имя должно соответсвовать развертыванию выше в apiVersion : apps/v1
+#  minReplicas: 1                       #минимум / максимум подов
+#  maxReplicas: 5
+#  metrics:
+#  - type : Resource                    # скелить при превышении цпу выше 70 или памяти 80 %
+#    resource:
+#      name: cpu
+#      target:
+#        type: Utilization
+#        averageUtilization: 5
+#        
+#
+# 
+#     
+#  - type : Resource                    # скелить при превышении цпу выше 70 или памяти 80 %
+#    resource:
+#      name: memory
+#      target:
+#        type: Utilization
+#        averageUtilization: 500     
+#     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+      
