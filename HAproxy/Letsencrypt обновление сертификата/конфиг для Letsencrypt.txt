@@ -1,0 +1,8 @@
+frontend main_http
+bind *:80
+acl is_letsencrypt path_beg -i /.well-known/acme-challenge/
+use_backend letsencrypt if is_letsencrypt
+
+----------------------------------------------------------
+backend letsencrypt
+server letsencrypt 192.168.0.26:4321
