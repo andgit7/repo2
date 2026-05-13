@@ -11,9 +11,9 @@
 
 
 
-chatid=376050665
+chatid=blabla
 path=/home/and/parser/parsed_grandtrain_ru/index.html
-token=7840513805:AAESfH3LIHUn_50fC5NxclX2d9mvoYJxgpw
+token=blabla
 file=/home/and/parser/zdarova-zaebal.txt
 #url=$(cat "$file" | jq -sRr @uri)
 
