@@ -35,3 +35,5 @@ if [ -s "$diff_file" ]; then
 else
     echo "$(date): изменений нет" >> /home/and/parser/monitor.log
 fi
+
+cat "$out" > "$snapshot"
