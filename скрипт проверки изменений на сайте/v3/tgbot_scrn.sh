@@ -29,7 +29,7 @@ if [ -s "$diff_file" ]; then
         -F document=@"$screenshot" > /dev/null
 
     # Обновляем снимок для будущих сравнений
-    cat "$out" > "$snapshot"
+
 
     echo "$(date): изменения найдены, уведомление отправлено" >> /home/and/parser/monitor.log
 else
