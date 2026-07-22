@@ -1,0 +1,139 @@
+<!-- ======================================== -->
+<!-- ПОЕЗД №018М                     -->
+<!-- 018М Москва — Симферополь -->
+<!-- ДАТА: 30 сен, ср -->
+<!-- ======================================== -->
+
+<div class="train train_seats train-sort train--tav" data-travel-time="99600" data-travel-cost="1158210" data-departure-time="1790745900" data-arrival="1790845500" data-number="028М Москва — Симферополь" data-privilege="" tabindex="0">
+		        
+        
+        <div class="features_row">
+                              
+        </div>
+        
+        
+        <div class="train_row train_row_middle">
+            <div class="train_timing">
+                <div class="train_timing_row train_timing_top">
+                    <div class="item dep">
+                        <div class="date_time">
+                            <span class="time" tabindex="0">08:25</span>                            
+                            <span class="date mb d-xl-none" tabindex="0">30 сен, ср</span>
+                        </div>
+                        <div class="date_dur dsk">
+                            <span class="date" tabindex="0">30 сентября, ср</span>
+                        </div>
+                        <div class="city_arrow">
+                            <span class="city" tabindex="0">Москва</span>
+                            <span class="arrow">
+                                <span class="dur dsk" tabindex="0">1 д. 3 ч. 40 м.</span>
+                            </span>
+                        </div>
+                        <div class="st" tabindex="0">Москва Казанская (Казанский вокзал)</div>
+                    </div>
+                    <div class="item arr">
+                        <div class="date_time">
+                            <span class="time" tabindex="0">12:05</span>                           
+                            <span class="date mb d-xl-none" tabindex="0">01 окт, чт</span>
+                        </div>
+                        <div class="date_dur dsk">
+                            <span class="date" tabindex="0">01 октября, чт</span>
+                        </div>
+                        <div class="city_arrow">
+                            <span class="city" tabindex="0">Симферополь</span>
+                        </div>
+                        <div class="st" tabindex="0">Симферополь</div>
+                    </div>
+                </div>
+                <div class="train_timing_dur d-xl-none" tabindex="0">
+                    <span class="desc">В пути:</span>
+                    <span class="dur">1 д. 3 ч. 40 м.</span>
+                </div>         
+            </div>
+            <div class="line"></div>
+                    <div class="train_row train_row_top">
+            <a class="train_num_cities js-ajax-modal-btn js-trainRouteRequested" data-src="/local/components/oscompany/train.route/ajax.php?train=028М&amp;date=30.09.2026&amp;from=2000003&amp;to=2078001&amp;date_in=30.09.2026" href="javascript:;" tabindex="0">
+                <span class="train__number-icon train__number-icon--tavex" aria-label="Иконка поезда"></span>
+                <span class="train__number-number">№028М</span>
+                        
+                <div class="train_cities">Москва — Симферополь</div>
+                <svg width="18" height="18" class="train_number__icon-info">
+                    <use xlink:href="/local/templates/gse/img/symbols.svg#icon-info-train"></use>
+                </svg>
+            </a>    
+                                                <div class="mark_item" tabindex="0">Двухэтажный</div>
+                                    <div class="mark_item" tabindex="0">Фирменный</div>
+                                    <div class="mark_item" tabindex="0">Скорый</div>
+                                                                    <div class="mark_item" tabindex="0">Вагон-ресторан</div>
+                                                                    <div class="train__additions">
+                        </div>
+        </div>
+                                                        <div class="seats seats_inline">
+						                        <div class="seats_description" tabindex="0">Осталось мест</div>
+                        <div class="seats_item_wrapper">
+                                                                                   
+                                                                                                <div class="seats_item" tabindex="0">
+                                    <div class="train_places">
+                                        <div class="train_places_name d-none d-xl-block">Купе</div>
+                                        <div class="train_places_name d-block d-xl-none">Купе</div>
+                                        <div class="train_seats_count">
+                                            209&nbsp;низ, 322&nbsp;верх, <span class="train_seats_count__disabil-ico">2&nbsp;места</span>                                        </div>
+                                    </div>
+                                    <div class="train_cost">от 11 582,10 ₽</div>     
+                                </div>  
+                                                                                   
+                                                                                                <div class="seats_item" tabindex="0">
+                                    <div class="train_places">
+                                        <div class="train_places_name d-none d-xl-block">Люкс</div>
+                                        <div class="train_places_name d-block d-xl-none">Люкс</div>
+                                        <div class="train_seats_count">
+                                            4&nbsp;низ, 4&nbsp;верх                                        </div>
+                                    </div>
+                                    <div class="train_cost">от 207 337,90 ₽</div>     
+                                </div>  
+                                                                                   
+                                                                                                <div class="seats_item" tabindex="0">
+                                    <div class="train_places">
+                                        <div class="train_places_name d-none d-xl-block">СВ</div>
+                                        <div class="train_places_name d-block d-xl-none">СВ</div>
+                                        <div class="train_seats_count">
+                                            9&nbsp;низ                                        </div>
+                                    </div>
+                                    <div class="train_cost">от 32 649,80 ₽</div>     
+                                </div>  
+                                                    </div>
+                        						                        <div class="button_row">
+															<div class="btn train__btn-train btn--waiting-list js-to-waiting-popup" data-src="#waitingModal" data-trainnum="028М" data-stfromcode="2000003" data-stfromname="Москва Казанская (Казанский вокзал)" data-sttocode="2078001" data-sttoname="Симферополь" data-datetimedep="08:25, 30.09.2026, ср" data-depdate="30.09.2026 08:25" data-firstdepdate="30.09.2026" data-depdatejs="30.09.2026" data-isauth="0" data-luxhide="0">
+									<svg width="29" height="30">
+										<use xlink:href="/local/components/gse/waitinglist/templates/.default/img/symbols.svg#icon-bell-transparent"></use>
+									</svg>
+									<span>Лист ожидания</span>
+								</div>
+							                                                            <a href="028М/" class="btn train__btn-train" onclick="$(this).parents('.trains__list').find('.train__btn-train').addClass('btn--disabled'); $('.default-preloader').show();">
+                                    <span>Выбрать</span>
+                                </a>
+                                                    </div>
+						                    </div>
+                                        
+        </div>
+
+        
+                <div class="train_row train_row_top">
+            <a class="train_num_cities js-ajax-modal-btn js-trainRouteRequested" data-src="/local/components/oscompany/train.route/ajax.php?train=028М&amp;date=30.09.2026&amp;from=2000003&amp;to=2078001&amp;date_in=30.09.2026" href="javascript:;" tabindex="0">
+                <span class="train__number-icon train__number-icon--tavex" aria-label="Иконка поезда"></span>
+                <span class="train__number-number">№028М</span>
+                        
+                <div class="train_cities">Москва — Симферополь</div>
+                <svg width="18" height="18" class="train_number__icon-info">
+                    <use xlink:href="/local/templates/gse/img/symbols.svg#icon-info-train"></use>
+                </svg>
+            </a>    
+                                                <div class="mark_item" tabindex="0">Двухэтажный</div>
+                                    <div class="mark_item" tabindex="0">Фирменный</div>
+                                    <div class="mark_item" tabindex="0">Скорый</div>
+                                                                    <div class="mark_item" tabindex="0">Вагон-ресторан</div>
+                                                                    <div class="train__additions">
+                        </div>
+        </div>
+        
+            </div>

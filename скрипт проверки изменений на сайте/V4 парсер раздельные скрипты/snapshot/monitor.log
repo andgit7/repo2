@@ -1,0 +1,13 @@
+2026-07-21 16:35:17,052 - INFO - Train monitor started for 018M
+2026-07-21 16:35:17,053 - INFO - ============================================================
+2026-07-21 16:35:17,053 - INFO - STARTING MONITOR FOR TRAIN 018M
+2026-07-21 16:35:17,053 - INFO - ============================================================
+2026-07-21 16:35:17,053 - INFO - Loading: https://grandtrain.ru/search/2000000-2078001/30.09.2026/
+2026-07-21 16:35:17,053 - INFO - ====== WebDriver manager ======
+2026-07-21 16:35:17,143 - INFO - Get LATEST chromedriver version for google-chrome
+2026-07-21 16:35:17,248 - INFO - Get LATEST chromedriver version for google-chrome
+2026-07-21 16:35:17,351 - INFO - Driver [/root/.wdm/drivers/chromedriver/linux64/147.0.7727.117/chromedriver-linux64/chromedriver] found in cache
+2026-07-21 16:35:17,877 - INFO - Driver created
+2026-07-21 16:35:26,234 - INFO - HTML saved, size: 320,617 bytes
+2026-07-21 16:35:27,238 - ERROR - Train 018M not found
+2026-07-21 16:35:27,240 - INFO - Available trains: 028М Москва — Симферополь, 018М Москва — Симферополь
