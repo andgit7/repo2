@@ -1,0 +1,387 @@
+    1  nano /etc/ssh/ssh_config
+    2  ufw status
+    3  ping ya.ru
+    4  ping 192.168.50.34
+    5  nano /etc/ssh/ssh_config
+    6  service ssh status
+    7  apt update -y
+    8  apt install openssh-server
+    9  service ssh status
+   10  service ssh start
+   11  service ssh enable
+   12  nano /etc/ssh/sshd_config
+   13  reboot 
+   14  apt update -y
+   15  apt upgrade -y
+   16  reboot 
+   17  apt install podman -y
+   18  podman --version
+   19  podman quadlet --help
+   20  systemctl list-units --type=service --state=running
+   21  sudo systemctl stop ModemManager multipathd udisks2 packagekit
+   22  sudo systemctl disable ModemManager multipathd udisks2 packagekit
+   23  systemctl list-units --type=service --state=running
+   24  cd /home/and/
+   25  mkdir deep
+   26  cd deep/
+   27  touch Containerfile
+   28  nano Containerfile 
+   29  podman ps
+   30  podman images
+   31  podman quadlet --help
+   32  podman build --tag localhost/free-deepseek-api:local --file Containerfile .
+   33  podman ps
+   34  podman images
+   35  podman secret create  free-deepseek-auth ./deepseek-auth.json
+   36  IFS= read -r -s PROXY_API_KEY
+   37  printf '\n'
+   38  printf '%s' "$PROXY_API_KEY" |   podman secret create free-deepseek-proxy-key -
+   39  podman secret list
+   40  mkdir -p ~/.config/containers/systemd/
+   41  cd ~/.config/containers/systemd/
+   42  touch freedeepseek.container
+   43  nano freedeepseek.container 
+   44  podman images
+   45  podman secret ls free-deepseek-auth
+   46  podman secret free-deepseek-auth
+   47  podman secret --help
+   48  podman secret inspect free-deepseek-auth
+   49  systemctl --user daemon-reload
+   50  systemctl --user start freedeepseekapi.service
+   51  systemctl --user start freedeepseek.service
+   52  journalctl --user -xeu freedeepseek.service
+   53  podman images
+   54  systemctl --user daemon-reload
+   55  systemctl --user start freedeepseek.service
+   56  systemctl --user enable freedeepseek.service
+   57  systemctl --user status freedeepseek.service
+   58  systemctl --user enable freedeepseek.service
+   59  curl -X POST http://:9655/v1
+   60  curl -X POST http://:192.168.50319655/v1
+   61  curl -X POST http://:192.168.50.31:9655/v1
+   62  curl http://localhost:9655/v1/sessions
+   63  netstat -tulpn
+   64  apt install net-tools
+   65  netstat -tulpn
+   66  reboot 
+   67  netstat -tulpn
+   68  systemctl --user status freedeepseek.service
+   69  systemctl list-units --type=service --state=running
+   70  systemctl  status freedeepseek.service
+   71  systemctl --user status freedeepseek.service
+   72  systemctl --user list-units --type=service
+   73  exit
+   74  cd /home/and/
+   75  history 
+   76  cd ~/.config/containers/systemd/
+   77  cp ~/.config/containers/systemd/freedeepseek.container /etc/containers/systemd/
+   78  systemctl daemon-reload
+   79  systemctl enable deepseek
+   80  systemctl enable freedeepseek
+   81  cat /etc/containers/systemd/freedeepseek.container
+   82  systemctl enable freedeepseek
+   83  systemctl --user list-unit-files | grep freedeepseek
+   84  sudo systemctl enable freedeepseek
+   85  cd /etc/containers/systemd/
+   86  systemctl daemon-reload
+   87  sudo systemctl enable freedeepseek.service
+   88  ls -la /etc/containers/systemd/
+   89  sudo rm -f /run/systemd/generator/freedeepseek.service
+   90  sudo rm -rf /run/systemd/generator/freedeepseek.service.d
+   91  systemctl daemon-reload
+   92  systemctl enable freedeepseek.service
+   93  systemctl status freedeepseek.service
+   94  systemctl start freedeepseek.service
+   95  systemctl status freedeepseek.service
+   96  systemctl enable freedeepseek.service
+   97  history 
+   98  systemctl --user status freedeepseek.service
+   99  systemctl daemon-reload
+  100  systemctl --user status freedeepseek.service
+  101  cd /home/and/
+  102  cd deep/
+  103  cd /etc/containers/systemd/
+  104  podman secret ls
+  105  systemctl --user daemon-reload
+  106  systemctl --user start freedeepseek.service
+  107  sudo systemctl status freedeepseek.service
+  108  podman ps
+  109  curl http://192.168.50.31:9655/health
+  110  sudo systemctl status freedeepseek.service
+  111  podman ps
+  112  history 
+  113  exit
+  114  history 
+  115  sudo systemctl status freedeepseek.service
+  116  systemctl enable freedeepseek.service
+  117  reboot 
+  118  sudo systemctl status freedeepseek.service
+  119  systemctl list-units --type=service --state=running
+  120  exit
+  121  systemctl list-units --type=service --state=running
+  122  history 
+  123  cd /etc/containers/systemd
+  124  systemctl list-units --type=service --state=running
+  125  curl -fsSL https://openclaw.ai/install.sh | bash
+  126  openclaw onboard
+  127  openclaw onboard --install-daemon
+  128  shutdown 
+  129  shutdown now
+  130  ifconfig
+  131  ip a
+  132  sudo ip link set eth1 up
+  133  ip a
+  134  ifconfig 
+  135  cd /etc/netplan/
+  136  ifconfig 
+  137  reboot 
+  138  ifconfig 
+  139  history 
+  140  curl -s "https://api.telegram.org/bot7840513805:AAESfH3LIHUn_50fC5NxclX2d9mvoYJxgpw/getMe"
+  141  ifconfig 
+  142  ping 192.168.1.41
+  143  ip route show default
+  144  ping ya.ru
+  145  ip route show default
+  146  curl -s "https://api.telegram.org/bot7840513805:AAESfH3LIHUn_50fC5NxclX2d9mvoYJxgpw/getMe"
+  147  reboot 
+  148  curl -s "https://api.telegram.org/bot7840513805:AAESfH3LIHUn_50fC5NxclX2d9mvoYJxgpw/getMe"
+  149  openclaw pairing approve telegram J4EGLBXU
+  150  apt update && sudo apt install -y sshpass
+  151  sshpass
+  152  cd /usr/lib/systemd/system/
+  153  mkdir /home/and/byedpi
+  154  reboot 
+  155  systemctl list-units --type=service --state=running
+  156  systemctl daemon-reload
+  157  systemctl list-units --type=service --state=running
+  158  netstat -tulpn
+  159  systemctl status byedpi
+  160  tcpdump -i any port 1234 -nn
+  161  netstat -tulpn
+  162  podman ps
+  163  history 
+  164  cd /usr/lib/systemd/system/
+  165  systemctl list-units --type=service --state=running
+  166  cd /etc/systemd/system/
+  167  cd /usr/lib/systemd/system/
+  168  service freedeepseek.service status
+  169  systemctl status freedeepseek.service 
+  170  cd (/etc/containers/systemd/
+  171  cd /etc/containers/systemd/
+  172  podman ps
+  173  podman images
+  174  podman ps
+  175  systemctl --user cat freedeepseekapi.service
+  176  systemctl cat freedeepseekapi.service
+  177  ls -la /run/user/$(id -u)/systemd/generator/
+  178  ls -la ~/.config/containers/systemd/*.container
+  179  systemctl cat freedeepseekapi.service
+  180  systemctl cat freedeepseek.service
+  181  ls /usr/lib/systemd/system-generators/podman-system-generator
+  182  ls /run/systemd/generator/
+  183  # Посмотрим, что сгенерировал Quadlet
+  184  sudo systemctl cat freedeepseek.service
+  185  sudo systemctl show freedeepseek.service | grep -E "ExecStart|ExecStop|Type"
+  186  systemctl show freedeepseek.service
+  187  podman ps
+  188  ls /usr/lib/systemd/system-generators/
+  189  cd /home/and/
+  190  mkdir move_jen
+  191  podman info | grep -E 'version|os|arch'
+  192  podman info
+  193  podman pull
+  194  podman volume ls
+  195  touch /etc/containers/systemd/jenkins-data.volume
+  196  nano /etc/containers/systemd/jenkins-data.volume
+  197  touch /etc/containers/systemd/jenkins.container
+  198  nano /etc/containers/systemd/jenkins.container
+  199  systemctl daemon-reload
+  200  systemctl start jenkins.service
+  201  systemctl status jenkins.service
+  202  cd /etc/containers/systemd
+  203  systemctl daemon-reload
+  204  systemctl start jenkins.service
+  205  sudo systemctl daemon-reload
+  206  sudo systemctl list-units --all | grep -i jenkins
+  207  sudo journalctl -u systemd-quadlet-generator -f
+  208  ls -la /run/systemd/generator/
+  209  which quadlet
+  210  sudo nano /etc/containers/systemd/jenkins.container
+  211  sudo systemctl daemon-reload
+  212  ls -la /run/systemd/generator/
+  213  reboot 
+  214  ls -la /run/systemd/generator/
+  215  sudo systemctl daemon-reload
+  216  ls -la /run/systemd/generator/
+  217  sudo journalctl -xe | grep -i "jenkins\|quadlet"
+  218  sudo journalctl -u systemd-quadlet-generator.service
+  219  sudo systemctl daemon-reload
+  220  ls -la /run/systemd/generator/
+  221  sudo journalctl -xe | grep -i "jenkins\|quadlet"
+  222  sudo journalctl -u systemd-quadlet-generator.service
+  223  sudo systemctl daemon-reload
+  224  ls -la /run/systemd/generator/
+  225  sudo journalctl -xe | grep -i "jenkins\|quadlet"
+  226  sudo systemctl daemon-reload
+  227  ls -la /run/systemd/generator/
+  228  sudo journalctl -xe | grep -i "jenkins\|quadlet"
+  229  sudo systemctl daemon-reload
+  230  sudo journalctl -xe | grep -i "jenkins\|quadlet"
+  231  sudo systemctl daemon-reload
+  232  sudo journalctl -xe | grep -i "jenkins\|quadlet"
+  233  sudo systemctl daemon-reload
+  234  sudo journalctl -xe | grep -i "jenkins\|quadlet"
+  235  sudo systemctl daemon-reload
+  236  sudo journalctl -xe | grep -i "jenkins\|quadlet"
+  237  ls -la /run/systemd/generator/
+  238  systemctl start jenkins.service
+  239  podman images
+  240  podman ps
+  241  sudo systemctl daemon-reload
+  242  systemctl start jenkins.service
+  243  sudo systemctl daemon-reload
+  244  podman rmi 2771c4579171
+  245  podman ps
+  246  podman stop d7acf762a5bf
+  247  podman rmi 2771c4579171
+  248  sudo systemctl daemon-reload
+  249  systemctl start jenkins.service
+  250  systemctl status jenkins.service
+  251  podman ps
+  252  netstat -tulpn
+  253  podman ps
+  254  sudo podman exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+  255  sudo podman volume inspect jenkins-data
+  256  cd /var/lib/containers/storage/volumes/jenkins-data/_data
+  257  ll
+  258  podman secret ls
+  259  podman ps
+  260  cd /home/and/move_jen/
+  261  ll
+  262  cd ..
+  263  ll
+  264  history 
+  265  cd /etc/containers/systemd
+  266  ll
+  267  cat jenkins-data.volume 
+  268  ssh-keygen
+  269  ping -c 4 ya.ru
+  270  cd /home/and/
+  271  ll
+  272  ssh-keygen -t rsa -C "jenkins"
+  273  ll
+  274  sudo mkdir -p /var/lib/containers/storage/volumes/jenkins-data.volume/_data/.ssh
+  275  cd /var/lib/containers/storage/volumes/jenkins-data.volume/_data/
+  276  ll
+  277  sudo mkdir -p /var/lib/containers/storage/volumes/jenkins-data/_data/.ssh
+  278  sudo ssh-keyscan -t ed25519 github.com | sudo tee -a /var/lib/containers/storage/volumes/jenkins-data/_data/.ssh/known_hosts
+  279  reboot 
+  280  podman ps
+  281  podman exec 93f98f55ef3d -it /bin/bash
+  282  podman exec -it 93f98f55ef3d  /bin/bash
+  283  history 
+  284  podman volume ls
+  285  podman volume inspect jenkins-data
+  286  podman exec -it 93f98f55ef3d  /bin/bash
+  287  reboot 
+  288  systemctl list-units --type=service --state=running
+  289  history 
+  290  systemctl list-units --type=service --state=running
+  291  systemctl show byedpi.service 
+  292  htop
+  293  time
+  294  вфеу
+  295  ъdate
+  296  datre
+  297  date
+  298  openclaw plugins list
+  299  openclaw browser open "https://yandex.ru"
+  300  openclaw
+  301  openclaw models list
+  302  nano ~/.ssh/config
+  303  cd /home/and/
+  304  history 
+  305  ssh-keygen -t ed25519 -C "web-openclaw"
+  306  ssh-copy-id root@192.168.50.36
+  307  ssh-copy-id -i /home/and/web-oc.pub root@192.168.50.36
+  308  ssh root@192.168.50.36
+  309  cp web-oc.pub ~/.ssh/web-oc.pub
+  310  ssh root@192.168.50.36
+  311  cp web-oc.pub ~/.ssh/web-oc
+  312  ssh root@192.168.50.36
+  313  cat ~/.ssh/web-oc.pub 
+  314  ssh -v -i ~/.ssh/web-oc root@192.168.50.36
+  315  chmod 600 /root/.ssh/web-oc
+  316  ls -la /root/.ssh/web-oc
+  317  ssh root@192.168.50.36
+  318  ssh -v -i ~/.ssh/web-oc root@192.168.50.36
+  319  ssh-keygen -t ed25519 -f /root/.ssh/web-oc_new -N ""
+  320  cat /root/.ssh/web-oc_new.pub
+  321  ssh root@192.168.50.36
+  322  ssh -i /root/.ssh/web-oc_new root@192.168.50.36
+  323  mv /root/.ssh/web-oc /root/.ssh/id_ed25519
+  324  cat /root/.ssh/web-oc 
+  325  mv /root/.ssh/web-oc_new /root/.ssh/id_ed25519
+  326  mv /root/.ssh/web-oc_new.pub /root/.ssh/id_ed25519.pub
+  327  chmod 600 /root/.ssh/id_ed25519
+  328  ssh root@192.168.50.36
+  329  nano ~/.ssh/config
+  330  chmod 600 ~/.ssh/config
+  331  ssh web
+  332  openclaw --version
+  333  openclaw
+  334  df -h
+  335  openclaw 
+  336  openclaw models list
+  337  ifconfig 
+  338  podman network ls
+  339  podman ps
+  340  podman images
+  341  podman ps
+  342  podman inspect ps 51d598a59c41
+  343  history 
+  344  openclaw plugins list 
+  345  openclaw plugins install @getfoundry/foundry-openclaw
+  346  openclaw plugins uninstall @getfoundry/foundry-openclaw
+  347  openclaw plugins install clawhub:@getfoundry/foundry-openclaw
+  348  openclaw plugins install @getfoundry/foundry-openclaw
+  349  openclaw plugins uninstall @getfoundry/foundry-openclaw
+  350  пше
+  351  git
+  352  cd /home/and/
+  353  git clone https://github.com/lekt9/openclaw-foundry
+  354  openclaw plugins install @getfoundry/foundry-openclaw@latest
+  355  mkdir -p ~/.openclaw/extensions/foundry
+  356  cd ~/.openclaw/extensions/foundry
+  357  npm pack @getfoundry/foundry-openclaw
+  358  tar -xzf getfoundry-foundry-openclaw-*.tgz --strip-components=1
+  359  npm install
+  360  npx esbuild index.ts --bundle --format=esm --platform=node --
+  361  npx esbuild index.ts --bundle --format=esm --platform=node --outfile=dist/index.js
+  362  ls dist/
+  363  mv package.json package.json.bak
+  364  openclaw gateway restart
+  365  openclaw plugins list
+  366  openclaw plugins list | grep foundry
+  367  foundry_research
+  368  openclaw plugins logs foundry-openclaw
+  369  openclaw plugins logs --help
+  370  openclaw foundry_learnings
+  371  openclaw plugins info foundry-openclaw
+  372  openclaw plugins inspect foundry-openclaw
+  373  openclaw plugins allow foundry-openclaw
+  374  openclaw plugins allow --id foundry-openclaw
+  375  openclaw plugins allow foundry-openclaw --yes
+  376  openclaw plugins allow --plugin=foundry-openclaw
+  377  openclaw plugins info foundry-openclaw
+  378  openclaw plugins logs foundry-openclaw
+  379  tail -n 50 ~/.openclaw/logs/openclaw.log | grep -i foundry
+  380  openclaw plugins logs --help
+  381  openclaw plugins list --verbose
+  382  openclaw plugins inspect foundry-openclaw --runtime --json
+  383  openclaw plugins inspect foundry-openclaw --runtime --json >> /home/and/1.txt
+  384  openclaw plugins inspect foundry-openclaw --json >> /home/and/1.txt
+  385  openclaw plugins inspect foundry-openclaw --runtime --json >> /home/and/1.txt
+  386  history 
+  387  history > /home/and/history_install_podman_openclaw.txt
