@@ -1,0 +1,4 @@
+composio login --user-api-key "uak_xXheNQX76onYIGp9IzzycgvGc9UJNt1eFaHdOd4TVq8"
+
+
+5a8d5867f603b72264272361f695f113e7b6ed44b55ac801   токен шлюза

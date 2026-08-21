@@ -1,0 +1,51 @@
+# ═══════════════════════════════════════════════════════════
+# Quadlet .container file — FreeDeepseekAPI (rootless)
+# Podman ≥ 4.4  |  systemd user service
+# ═══════════════════════════════════════════════════════════
+
+[Unit]
+Description=FreeDeepseekAPI — rootless proxy
+Documentation=https://github.com/your-org/freedeepseekapi
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+# ── Образ ───────────────────────────────────────────────────
+Image=localhost/free-deepseek-api:local
+
+# ── Имя контейнера ──────────────────────────────────────────
+ContainerName=freedeepseekapi
+
+# ── Сеть ────────────────────────────────────────────────────
+# публикуем только на 127.0.0.1 — никаких прямых внешних связей
+PublishPort=192.168.50.31:9655:9655
+
+# ── Секреты ─────────────────────────────────────────────────
+# монтируются как /run/secrets/deepseek-auth.json
+Secret=free-deepseek-auth,target=deepseek-auth.json,type=mount,uid=1000,gid=1000,mode=0400
+# монтируются как /run/secrets/proxy-api-key
+Secret=free-deepseek-proxy-key,target=proxy-api-key,type=mount,uid=1000,gid=1000,mode=0400
+
+# ── Безопасность ────────────────────────────────────────────
+ReadOnly=true
+NoNewPrivileges=true
+DropCapability=ALL
+SecurityLabelDisable=true
+
+# ── Tmpfs для /tmp (образ readonly) ─────────────────────────
+Tmpfs=/tmp:size=64m,mode=1777
+
+# ── Ресурсы ─────────────────────────────────────────────────
+PodmanArgs=--memory=256m --cpus=1.0
+
+# ── Перезапуск при сбое ─────────────────────────────────────
+AutoUpdate=local
+
+[Service]
+Restart=on-failure
+RestartSec=10s
+TimeoutStartSec=60
+TimeoutStopSec=30
+
+[Install]
+WantedBy=default.target

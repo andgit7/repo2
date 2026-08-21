@@ -1,0 +1,32 @@
+aad3949723a6562458204a23d77ebc3b9546c7f985c40b827c32a60c61df1073
+
+curl -H "Authorization: Bearer aad3949723a6562458204a23d77ebc3b9546c7f985c40b827c32a60c61df1073" http://192.168.50.31:9655/v1/models
+
+
+896e75a0ed9f9adfcf3b79742
+
+
+
+podman run --detach \
+  --restart=always \
+  --name free-deepseek-api \
+  --publish 192.168.50.31:9655:9655 \
+  --secret free-deepseek-auth,target=deepseek-auth.json,uid=1000,gid=1000,mode=0400 \
+  --secret free-deepseek-proxy-key,target=proxy-api-key,uid=1000,gid=1000,mode=0400 \
+  --read-only \
+  --cap-drop=ALL \
+  --security-opt=no-new-privileges \
+  localhost/free-deepseek-api:local
+  
+  
+  
+
+
+
+
+
+ curl -X POST http://192.168.50.31:9655/v1/chat/completions   -H "Authorization: Bearer aad3949723a6562458204a23d77ebc3b9546c7f985c40b827c32a60c61df1073"   -H "Content-Type: application/json"   -d '{
+    "model": "deepseek-chat",
+    "messages": [{"role": "user", "content": "Привет! Ответь одной фразой."}],
+    "stream": false
+  }'
